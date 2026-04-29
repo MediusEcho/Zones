@@ -7,21 +7,6 @@ import org.junit.jupiter.api.Test
 
 class TestZone {
 
-    private val zoneStorage: ZoneStorage = ZoneStorage()
-
-    @Test
-    fun testCuboid() {
-        val zone = CuboidZone(BlockVector(-104, 86, 55), BlockVector(-102, 84, 55))
-        println("chunks: ${zone.chunks.size}")
-    }
-
-    @Test
-    fun fuck() {
-        for (i in 1..1) {
-            println(i)
-        }
-    }
-
     @Test
     fun testPolygon() {
         val zone = PolygonZone(arrayOf(
@@ -36,14 +21,5 @@ class TestZone {
         ))
 
         println(zone.intersects(BlockVector(2, 0, 0)))
-    }
-
-    @Test
-    fun testMerge() {
-        println(mergeAlternately("ab", "pqrs"))
-    }
-
-    fun mergeAlternately(word1: String, word2: String): String {
-
     }
 }
