@@ -25,6 +25,7 @@
  */
 package net.mediusecho.zones.common
 
+import org.bukkit.util.Vector
 import java.io.Serializable
 import kotlin.math.max
 import kotlin.math.min
@@ -33,8 +34,13 @@ class BoundingBox(val min: BlockVector, val max: BlockVector): Serializable {
 
     val size: BlockVector = (max - min) + 1
 
-    val center: BlockVector
-        get() = min + (size / 2)
+    val center: Vector
+        get() {
+            val width: Double = min.x + (size.x / 2.0)
+            val depth: Double = min.z + (size.z / 2.0)
+            val height: Double = min.y + (size.y / 2.0)
+            return Vector(width, height, depth)
+        }
 
     fun intersects(vector: BlockVector): Boolean {
         return vector.x >= min.x && vector.y >= min.y && vector.z >= min.z &&
@@ -61,7 +67,7 @@ class BoundingBox(val min: BlockVector, val max: BlockVector): Serializable {
             var maxY = points[0].y
             var maxZ = points[0].z
 
-            for (i in 1 until points.size) {
+            for (i in 1..< points.size) {
                 val p = points[i]
                 minX = min(p.x, minX)
                 minY = min(p.y, minY)
