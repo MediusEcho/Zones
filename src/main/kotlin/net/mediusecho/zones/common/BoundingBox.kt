@@ -1,9 +1,10 @@
 package net.mediusecho.zones.common
 
+import java.io.Serializable
 import kotlin.math.max
 import kotlin.math.min
 
-class BoundingBox(val min: BlockVector, val max: BlockVector) {
+class BoundingBox(val min: BlockVector, val max: BlockVector): Serializable {
 
     val size: BlockVector = (max - min) + 1
 
@@ -16,9 +17,9 @@ class BoundingBox(val min: BlockVector, val max: BlockVector) {
     }
 
     fun iterate(block: (Int, Int, Int) -> Unit) {
-        for (x in min.x until max.x) {
-            for (y in min.y until max.y) {
-                for (z in min.z until max.z) {
+        for (x in min.x..<max.x) {
+            for (y in min.y..<max.y) {
+                for (z in min.z..<max.z) {
                     block(x, y, z)
                 }
             }
